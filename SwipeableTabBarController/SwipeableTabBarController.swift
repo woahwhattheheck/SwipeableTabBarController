@@ -144,6 +144,8 @@ open class SwipeableTabBarController: UITabBarController {
             return
         }
 
+        // A newer immediate request supersedes the queued selection.
+        pendingSelection = nil
         prepareTransition(from: source, usesPanInteractor: usesPanInteractor)
         isApplyingPreparedSelection = true
         defer { isApplyingPreparedSelection = false }
@@ -156,6 +158,8 @@ open class SwipeableTabBarController: UITabBarController {
             return
         }
 
+        // A newer immediate request supersedes the queued selection.
+        pendingSelection = nil
         prepareTransition(from: source, usesPanInteractor: false)
         isApplyingPreparedSelection = true
         defer { isApplyingPreparedSelection = false }
@@ -397,6 +401,8 @@ extension SwipeableTabBarController: UITabBarControllerDelegate {
         }
 
         if !isApplyingPreparedSelection {
+            // This accepted tap supersedes any older queued selection.
+            pendingSelection = nil
             prepareTransition(from: .tap, usesPanInteractor: false)
         }
         return true
