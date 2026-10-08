@@ -26,6 +26,10 @@ class TabBarController: SwipeableTabBarController {
         /// if you want cycling switch tab, set true 'isCyclingEnabled'
         isCyclingEnabled = true
 
+        if ProcessInfo.processInfo.arguments.contains("AllowLeftSwipesOnly") {
+            allowedSwipeDirection = .left
+        }
+
         /// Disable custom transition on tap.
         //tapAnimatedTransitioning = nil
         

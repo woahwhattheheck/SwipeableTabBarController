@@ -77,6 +77,20 @@ class SwipeableTabBarControllerUITests: XCTestCase {
         assertTabSelected(.team, in: app)
     }
 
+    func testAllowedLeftSwipeDirectionRejectsRightSwipes() {
+        let app = XCUIApplication()
+        app.launchArguments = ["AllowLeftSwipesOnly"]
+        app.launch()
+
+        assertTabSelected(.team, in: app)
+
+        app.swipeLeft()
+        assertTabSelected(.settings, in: app)
+
+        app.swipeRight()
+        assertTabSelected(.settings, in: app)
+    }
+
     func testRapidSelectedIndexTransitionsRemainInteractive() {
         assertRapidProgrammaticTransitionsRemainInteractive("StressSelectedIndexTransitions")
     }

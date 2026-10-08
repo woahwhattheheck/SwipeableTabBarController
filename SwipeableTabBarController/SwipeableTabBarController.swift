@@ -352,7 +352,7 @@ extension SwipeableTabBarController: UIGestureRecognizerDelegate {
         let translation = panGesture.translation(in: view)
         switch allowedSwipeDirection {
         case .left:
-            return translation.x > 0
+            return translation.x < 0
         case .right:
             return translation.x > 0
         case .both:
